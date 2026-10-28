@@ -199,4 +199,18 @@ class App extends BaseConfig
      * @see http://www.w3.org/TR/CSP/
      */
     public bool $CSPEnabled = false;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        // Derive baseURL from the current request so the site works both under
+        // XAMPP (http://localhost/tgsaving/public/) and `spark serve`.
+        if (! is_cli() && ! empty($_SERVER['HTTP_HOST'])) {
+            $https  = ! empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off';
+            $folder = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/')), '/');
+
+            $this->baseURL = ($https ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $folder . '/';
+        }
+    }
 }

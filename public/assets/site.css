@@ -83,3 +83,9 @@
 .gallery-slot img{width:100%;height:140px;object-fit:cover;border-radius:5px}
 .gallery-slot input[type=file]{font-size:11px}
 @media(max-width:600px){.news-event-info{grid-template-columns:1fr;gap:16px}.news-photo-gallery{gap:12px}.gallery-editor-grid{grid-template-columns:1fr}.gallery-editor{padding:14px}}
+.brand-logo{width:64px;height:64px;flex:none;border-radius:12px}.brand strong{font-size:20px;line-height:1.4;color:var(--purple)}.brand small{letter-spacing:0;font-size:12px}
+.admin-brand img{display:block;width:56px;height:56px;border-radius:10px;margin-bottom:12px}.admin-brand span{display:block;font:600 14px/1.5 'Noto Sans Thai',Tahoma,sans-serif;margin-left:0}
+.login-logo{display:block;width:72px;height:72px;border-radius:12px;margin-bottom:16px}
+@media(max-width:900px){.header-note{display:none}}
+@media(max-width:600px){.brand-logo{width:48px;height:48px}.brand strong{font-size:15px}.brand small{display:none}.admin-brand img{width:40px;height:40px;margin:0}.admin-brand{display:flex;align-items:center;gap:10px}.admin-brand span{font-size:12px}}
+.login-org{color:var(--purple);font-weight:600;font-size:15px;margin-bottom:14px}
