@@ -1,0 +1,13 @@
+<?= $this->extend('layout') ?>
+<?= $this->section('content') ?>
+<?= view('hero_slider') ?>
+<div class="container quick-links"><a href="<?= base_url('?category='.urlencode('ประกาศสหกรณ์').'#news') ?>"><span>01</span><strong>ประกาศสหกรณ์</strong><b>↗</b></a><a href="<?= base_url('?category='.urlencode('ข่าวประชาสัมพันธ์').'#news') ?>"><span>02</span><strong>ข่าวประชาสัมพันธ์</strong><b>↗</b></a><a href="<?= base_url('?category='.urlencode('ข่าวกิจกรรม').'#news') ?>"><span>03</span><strong>กิจกรรมของเรา</strong><b>↗</b></a></div>
+<section class="container news-section" id="news"><div class="section-heading"><div><div class="eyebrow purple">NEWS & UPDATES</div><h2>ข่าวสารและความเคลื่อนไหว</h2></div><span class="muted">อัปเดตเรื่องราวจากสหกรณ์</span></div>
+<form class="search-row" method="get"><label class="sr-only" for="q">ค้นหาข่าว</label><input id="q" name="q" value="<?= esc($q) ?>" placeholder="ค้นหาหัวข้อข่าวสาร…"><label class="sr-only" for="category">หมวดหมู่</label><select id="category" name="category"><option value="">ทุกหมวดหมู่</option><?php foreach (\App\Models\Article::CATEGORIES as $cat): ?><option <?= $category === $cat ? 'selected' : '' ?>><?= esc($cat) ?></option><?php endforeach ?></select><button>ค้นหา</button></form>
+<?php if ($sections): ?><?= view('news_sections', ['sections'=>$sections]) ?><?php $articles = $sections['ข่าวกิจกรรม']; endif ?>
+<div class="news-grid"><?php foreach ($articles as $a): ?><article class="news-card"><a class="card-image" href="<?= base_url('news/'.$a['id']) ?>"><?php if ($a['image']): ?><img loading="lazy" src="<?= base_url('media/'.$a['image']) ?>" alt="<?= esc($a['title']) ?>"><?php else: ?><div class="placeholder-art"><span>TG</span><small>เติบโตไปด้วยกัน</small></div><?php endif ?></a><div class="card-content"><div class="meta"><span><?= esc($a['category']) ?></span><time><?= esc(date('d/m/',strtotime($a['created_at'])).(date('Y',strtotime($a['created_at']))+543)) ?></time></div><h3><a href="<?= base_url('news/'.$a['id']) ?>"><?= esc($a['title']) ?></a></h3><p><?= esc(mb_strimwidth($a['body'],0,130,'…')) ?></p><a class="read-more" href="<?= base_url('news/'.$a['id']) ?>">อ่านรายละเอียด <span>↗</span></a></div></article><?php endforeach ?></div>
+<?php if (!$articles): ?><div class="empty">ไม่พบข่าวสารที่ตรงกับการค้นหา <a href="<?= base_url() ?>">ดูข่าวทั้งหมด</a></div><?php endif ?>
+<?php if (!$sections): ?><?= $pager->links() ?><?php endif ?>
+<div class="coming"><div><div class="eyebrow purple">NEXT CHAPTER</div><h3>บริการข้อมูลสำหรับสมาชิก</h3><p>วารสาร แบบฟอร์ม ปฏิทินกิจกรรม และอัตราดอกเบี้ย จะเพิ่มในระยะถัดไป</p></div><span class="tag">อยู่ระหว่างพัฒนา</span></div>
+</section>
+<?= $this->endSection() ?>
